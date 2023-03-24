@@ -1,16 +1,16 @@
 // De dice class word hier gemaakt
 class Dice {
-    constructor(id, dices = ['⚀', '⚁', '⚂', '⚃', '⚄', '⚅']) {
-      this.id = id;
-      this.dices = dices;
-  }
+  constructor(id, dices = ['⚀', '⚁', '⚂', '⚃', '⚄', '⚅']) {
+    this.id = id;
+    this.dices = dices;
+}
 }
 // De stats class word hier gemaakt
 class Stats {
- constructor(rolls = [], rollAmount = []) {
-    this.rolls = rolls;
-    this.rollAmount = rollAmount;
-  }
+constructor(rolls = [], rollAmount = []) {
+  this.rolls = rolls;
+  this.rollAmount = rollAmount;
+}
 }
 
 // Hier maken we een kopie van de classes
@@ -18,19 +18,73 @@ const Dice_inst = new Dice(1);
 const Stats_inst = new Stats();
 
 
-// Deze functie rollt de dobbelsteen en pusht de nummer
-const roll = () => {
-    num = Math.floor(Math.random() * 6 + 1);
-    console.log(num);
-    item.innerHTML = Dice_inst.dices[num - 1];
-    Stats_inst.rolls.push(num);
-    // Met deze functie berekent hij het gemiddelde
-    calcMid();
-    // Met deze functie voegt hij het getal toe aan de lijst met getallen
-    addList(num);
-    // Hier voegt hij het getal bij de scoreboard
-    addNum(num);
+
+
+var elDiceOne       = document.getElementById('dice1');
+// var elDiceTwo       = document.getElementById('dice2');
+var elComeOut       = document.querySelector('body');
+
+elComeOut.onclick   = function () {rollDice();};
+
+function rollDice() {
+
+  var diceOne   = Math.floor((Math.random() * 6) + 1);
+  // var diceTwo   = Math.floor((Math.random() * 6) + 1);
+ 
+  console.log(diceOne);
+
+  for (var i = 1; i <= 6; i++) {
+    elDiceOne.classList.remove('show-' + i);
+    if (diceOne === i) {
+      elDiceOne.classList.add('show-' + i);
+    }
+  }
+
+  // for (var k = 1; k <= 6; k++) {
+  //   elDiceTwo.classList.remove('show-' + k);
+  //   if (diceTwo === k) {
+  //     elDiceTwo.classList.add('show-' + k);
+  //   }
+  // } 
+  // setTimeout(rollDice(), 1000);
+
+  Stats_inst.rolls.push(diceOne);
+  // Met deze functie berekent hij het gemiddelde
+  calcMid();
+  // Met deze functie voegt hij het getal toe aan de lijst met getallen
+  addList(diceOne);
+  // Hier voegt hij het getal bij de scoreboard
+  addNum(diceOne);
 }
+
+
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+// Deze functie rollt de dobbelsteen en pusht de nummer
+// const roll = () => {
+//     num = Math.floor(Math.random() * 6 + 1);
+//     console.log(num);
+//     item.innerHTML = Dice_inst.dices[num - 1];
+//     Stats_inst.rolls.push(num);
+//     // Met deze functie berekent hij het gemiddelde
+//     calcMid();
+//     // Met deze functie voegt hij het getal toe aan de lijst met getallen
+//     addList(num);
+//     // Hier voegt hij het getal bij de scoreboard
+//     addNum(num);
+// }
 
 
 
@@ -64,7 +118,7 @@ const addNum = (x) => {
 }
 
 // Dit is de event Lisener die zogt dat bij elke klik rolt hij de dobbelsteen
-item = document.getElementById('dobbelsteen');
-item.addEventListener("click", roll);
-document.querySelector('body').addEventListener("keydown", roll);
-roll();
+// item = document.getElementById('dobbelsteen');
+// item.addEventListener("click", rollDice);
+document.querySelector('body').addEventListener("keydown", rollDice);
+rollDice();
